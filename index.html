@@ -3,6 +3,7 @@
     <head lang="en">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
         <title>Etch-a-sketch</title>
     </head>
     <body>
@@ -16,6 +17,7 @@
                 singleSquare.classList.add('square');
                 return singleSquare;
             }
+
             function createGrid(){
                 const gridContainer = document.createElement('div');
                 gridContainer.classList.add('container');
@@ -27,11 +29,21 @@
                     }
                     gridContainer.appendChild(gridRow);
                 }
+                gridContainer.setAttribute('id', "gridContainer")
                 gridContainer.setAttribute('style', "display: flex; flex-direction: row; flex-wrap: no-wrap; justify-content: center;")
+                
+                gridContainer.addEventListener('mouseover', (e) => {
+                    console.log(e.target);
+                    if (e.target.classList.contains("square")){
+                        e.target.classList.toggle('drawn');
+                    }
+                })
+
                 return gridContainer;
             }
-
+            
             bodyHTMLnode.appendChild(createGrid());
+
         </script>
     </body>
 </html>
