@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Etch-a-sketch</title>
+    </head>
+    <body>
+
+        <script>
+            const bodyHTMLnode = document.querySelector("body");
+
+            function createSquare() {
+                const singleSquare = document.createElement('div');
+                singleSquare.setAttribute("style", "width: 20px; height: 20px; border: 1px solid black;");
+                singleSquare.classList.add('square');
+                return singleSquare;
+            }
+            function createGrid(){
+                const gridContainer = document.createElement('div');
+                gridContainer.classList.add('container');
+                for (let row=0; row < 16; row++){
+                    const gridRow = document.createElement('div');
+                    for (let column = 0; column < 16; column++){
+                        const square = createSquare();
+                        gridRow.appendChild(square);
+                    }
+                    gridContainer.appendChild(gridRow);
+                }
+                gridContainer.setAttribute('style', "display: flex; flex-direction: row; flex-wrap: no-wrap; justify-content: center;")
+                return gridContainer;
+            }
+
+            bodyHTMLnode.appendChild(createGrid());
+        </script>
+    </body>
+</html>
