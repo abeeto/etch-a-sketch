@@ -7,24 +7,25 @@
         <title>Etch-a-sketch</title>
     </head>
     <body>
-
         <script>
             const bodyHTMLnode = document.querySelector("body");
 
-            function createSquare() {
+            function createSquare(width=50) {
                 const singleSquare = document.createElement('div');
-                singleSquare.setAttribute("style", "width: 20px; height: 20px; border: 1px solid black;");
+                singleSquare.setAttribute("style", `width: ${width}px; height: ${width}px; border: 1px solid black;`);
                 singleSquare.classList.add('square');
                 return singleSquare;
             }
 
-            function createGrid(){
+            function createGrid(gridSize=16){
                 const gridContainer = document.createElement('div');
+                gridContainer.setAttribute('style', 'height: 820px; width: 820px;')
                 gridContainer.classList.add('container');
-                for (let row=0; row < 16; row++){
+                for (let row=0; row < gridSize; row++){
                     const gridRow = document.createElement('div');
-                    for (let column = 0; column < 16; column++){
-                        const square = createSquare();
+                    const squareSize = Math.floor(820 / gridSize);
+                    for (let column = 0; column < gridSize; column++){
+                        const square = createSquare(squareSize);
                         gridRow.appendChild(square);
                     }
                     gridContainer.appendChild(gridRow);
@@ -38,12 +39,18 @@
                         e.target.classList.toggle('drawn');
                     }
                 })
-
-                return gridContainer;
+                bodyHTMLnode.appendChild(gridContainer);
             }
             
-            bodyHTMLnode.appendChild(createGrid());
-
+            const newGridButton = document.createElement('button');
+            newGridButton.innerText = "New Grid";
+            newGridButton.addEventListener("click", () => {
+                let newGridSize = parseInt(prompt("X * X grid, type desired X:", "16"));
+                document.querySelector('#gridContainer').remove();
+                createGrid(newGridSize);
+            })
+            bodyHTMLnode.appendChild(newGridButton);
+            createGrid();
         </script>
     </body>
 </html>
