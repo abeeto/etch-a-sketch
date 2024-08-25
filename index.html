@@ -20,10 +20,10 @@
                 const gridContainer = document.createElement('div');
                 gridContainer.setAttribute('id', "gridContainer")
 
-                for (let row=0; row < gridSize; row++){
+                for (let column=0; column < gridSize; column++){
                     const gridColumn = document.createElement('div');
                     gridColumn.classList.add('gridColumn');
-                    for (let column = 0; column < gridSize; column++){
+                    for (let row = 0; row < gridSize; row++){
                         gridColumn.appendChild(createSquare());
                     }
                     gridContainer.appendChild(gridColumn);
