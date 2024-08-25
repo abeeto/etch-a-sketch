@@ -41,7 +41,10 @@
             const newGridButton = document.createElement('button');
             newGridButton.innerText = "New Grid";
             newGridButton.addEventListener("click", () => {
-                let newGridSize = parseInt(prompt("X * X grid, type desired X:", "16"));
+                let newGridSize;
+                while (newGridSize > 100 || typeof(newGridSize) === "undefined") {
+                    newGridSize = parseInt(prompt("X * X grid, type desired X:", "16"));
+                }
                 document.querySelector('#gridContainer').remove();
                 createGrid(newGridSize);
             })
