@@ -10,28 +10,24 @@
         <script>
             const bodyHTMLnode = document.querySelector("body");
 
-            function createSquare(width=50) {
+            function createSquare() {
                 const singleSquare = document.createElement('div');
-                singleSquare.setAttribute("style", `width: ${width}px; height: ${width}px; border: 1px solid black;`);
                 singleSquare.classList.add('square');
                 return singleSquare;
             }
 
             function createGrid(gridSize=16){
                 const gridContainer = document.createElement('div');
-                gridContainer.setAttribute('style', 'height: 820px; width: 820px;')
-                gridContainer.classList.add('container');
-                for (let row=0; row < gridSize; row++){
-                    const gridRow = document.createElement('div');
-                    const squareSize = Math.floor(820 / gridSize);
-                    for (let column = 0; column < gridSize; column++){
-                        const square = createSquare(squareSize);
-                        gridRow.appendChild(square);
-                    }
-                    gridContainer.appendChild(gridRow);
-                }
                 gridContainer.setAttribute('id', "gridContainer")
-                gridContainer.setAttribute('style', "display: flex; flex-direction: row; flex-wrap: no-wrap; justify-content: center;")
+
+                for (let row=0; row < gridSize; row++){
+                    const gridColumn = document.createElement('div');
+                    gridColumn.classList.add('gridColumn');
+                    for (let column = 0; column < gridSize; column++){
+                        gridColumn.appendChild(createSquare());
+                    }
+                    gridContainer.appendChild(gridColumn);
+                }
                 
                 gridContainer.addEventListener('mouseover', (e) => {
                     console.log(e.target);
