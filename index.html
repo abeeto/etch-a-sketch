@@ -16,6 +16,13 @@
                 return singleSquare;
             }
 
+            function darkenOnHover(e){
+                let squareStyle = getComputedStyle(e.target);
+                let squareOpacity = parseFloat(squareStyle.getPropertyValue("opacity"));
+                squareOpacity = squareOpacity < 1 ? squareOpacity + 0.1 : squareOpacity;
+                e.target.setAttribute('style', `opacity: ${squareOpacity}`)
+            }
+
             function createGrid(gridSize=16){
                 const gridContainer = document.createElement('div');
                 gridContainer.setAttribute('id', "gridContainer")
@@ -30,9 +37,9 @@
                 }
                 
                 gridContainer.addEventListener('mouseover', (e) => {
-                    console.log(e.target);
                     if (e.target.classList.contains("square")){
                         e.target.classList.toggle('drawn');
+                        darkenOnHover(e);
                     }
                 })
                 bodyHTMLnode.appendChild(gridContainer);
